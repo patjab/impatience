@@ -17,15 +17,17 @@ class Player extends Component {
     if (e.keyCode > 36 && e.keyCode < 41 ) {
       this.props.canvas.getContext("2d").clearRect(0, 0, this.props.canvas.width, this.props.canvas.height)
       this.setState({walkingCycle: (this.state.walkingCycle+1) % 2}, ()=> {
-        switch(e.keyCode) {
-          case 37: this.setState({xPosition: this.state.xPosition -= this.state.speed}); break;
-          case 38: this.setState({yPosition: this.state.yPosition -= this.state.speed}); break;
-          case 39: this.setState({xPosition: this.state.xPosition += this.state.speed}); break;
-          case 40: this.setState({yPosition: this.state.yPosition += this.state.speed}); break;
+        if (e.keyCode === 37 && this.state.xPosition - this.state.speed > 0) {
+          this.setState({xPosition: this.state.xPosition -= this.state.speed})
+        } else if (e.keyCode === 38 && this.state.yPosition - this.state.speed > 0) {
+          this.setState({yPosition: this.state.yPosition -= this.state.speed})
+        } else if (e.keyCode === 39 && this.state.xPosition + this.state.speed + 50 < this.props.canvas.width) {
+          this.setState({xPosition: this.state.xPosition += this.state.speed})
+        } else if (e.keyCode === 40 && this.state.yPosition + this.state.speed + 50 < this.props.canvas.height) {
+          this.setState({yPosition: this.state.yPosition += this.state.speed})
         }
       })
     }
-
   }
 
   componentDidMount() {
