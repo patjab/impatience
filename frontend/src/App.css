@@ -22,10 +22,20 @@
   font-size: large;
 }
 
+html, body, div, canvas {
+    margin: 0;
+    padding: 0;
+}
+
 canvas {
-      background: #eee;
-      display: block;
-      margin: 0 auto;
+    background: #383741;
+    margin: 0 auto;
+    padding: 0;
+}
+
+image {
+  margin: 0;
+  padding: 0;
 }
 
 .hidden {

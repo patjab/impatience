@@ -7,12 +7,13 @@ class Canvas extends Component {
 
   componentDidMount() {
     this.props.setCanvas(this.refs.playarea)
+    this.refs.playarea.style="background: url('../3dBrooklynBridge.jpg'); background-size: 480px; background-repeat: no-repeat;"
   }
 
   render() {
     return (
       <Fragment>
-        <canvas ref='playarea' width="480" height="700"></canvas>
+        <canvas ref='playarea' width="480" height="400"></canvas>
         <Player/>
       </Fragment>
     )
