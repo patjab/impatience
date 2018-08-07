@@ -10,6 +10,7 @@ class Player extends Component {
     }
 
     if (e.keyCode > 36 && e.keyCode < 41 ) {
+      e.preventDefault()
       if (e.keyCode === 37 && this.props.player.xPosition - this.props.player.speed > 0) {
         this.props.moveLeft()
       } else if (e.keyCode === 38 && this.props.player.yPosition - this.props.player.speed > 0) {
@@ -19,8 +20,8 @@ class Player extends Component {
       } else if (e.keyCode === 40 && this.props.player.yPosition + this.props.player.speed + 50 < this.props.canvas.height) {
         this.props.moveDown()
       }
-
     }
+
   }
 
   componentDidMount() {
@@ -49,14 +50,15 @@ class Player extends Component {
 const mapStateToProps = (state) => {
   return {
     canvas: state.canvas,
-    player: state.player
+    player: state.player,
+    backgroundMagnification: state.backgroundMagnification
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    moveUp: () => dispatch(movePlayer(0, -1)),
-    moveDown: () => dispatch(movePlayer(0, 1)),
+    moveUp: () => dispatch(movePlayer(0, 1)),
+    moveDown: () => dispatch(movePlayer(0, -1)),
     moveLeft: () => dispatch(movePlayer(-1, 0)),
     moveRight: () => dispatch(movePlayer(1, 0)),
     changeSpeed: () => dispatch(changeSpeed())

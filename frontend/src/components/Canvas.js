@@ -7,16 +7,29 @@ class Canvas extends Component {
 
   componentDidMount() {
     this.props.setCanvas(this.refs.playarea)
-    this.refs.playarea.style="background: url('../3dBrooklynBridge.jpg'); background-size: 480px; background-repeat: no-repeat;"
+    this.refs.playarea.style = `background: url('../3dBrooklynBridge.jpg'); background-size: ${480*this.props.backgroundMagnification}px; background-position: center;`
   }
+
+  componentDidUpdate() {
+    this.refs.playarea.style = `background: url('../3dBrooklynBridge.jpg'); background-size: ${480*this.props.backgroundMagnification}px; background-position: center;`
+  }
+
+  // background-size: 700px 260px;
+  // background-position: center;
 
   render() {
     return (
       <Fragment>
-        <canvas ref='playarea' width="480" height="400"></canvas>
+        <canvas ref='playarea' width="480" height="300"></canvas>
         <Player/>
       </Fragment>
     )
+  }
+}
+
+const mapStateToProps = (state) => {
+  return {
+    backgroundMagnification: state.backgroundMagnification
   }
 }
 
@@ -26,4 +39,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(null, mapDispatchToProps)(Canvas)
+export default connect(mapStateToProps, mapDispatchToProps)(Canvas)
