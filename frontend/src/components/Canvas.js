@@ -1,25 +1,28 @@
 import React, { Component, Fragment } from 'react'
+import { setThisCanvas } from '../actions.js'
+import { connect } from 'react-redux'
 import Player from './Player'
 
-export default class Canvas extends Component {
-
-  // move the context drawer to redux state
-  state = {
-    canvas: null
-  }
-
+class Canvas extends Component {
 
   componentDidMount() {
-    this.setState({canvas: this.refs.playarea})
+    this.props.setCanvas(this.refs.playarea)
   }
 
   render() {
     return (
       <Fragment>
-        <canvas ref='playarea' width="480" height="320"></canvas>
-        <Player canvas={this.state.canvas}/>
+        <canvas ref='playarea' width="480" height="700"></canvas>
+        <Player/>
       </Fragment>
     )
   }
-
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setCanvas: (canvas) => { dispatch(setThisCanvas(canvas)) }
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Canvas)

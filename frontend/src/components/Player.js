@@ -1,37 +1,31 @@
 import React, { Component } from 'react'
-
-export default class Player extends Component {
+import { connect } from 'react-redux'
+class Player extends Component {
 
   state = {
      walkingCycle: 0, // it appears that we don't need this in the global redux state
-     xPosition: 0,
-     yPosition: 0
+     xPosition: 240,
+     yPosition: 600,
+     speed: 4
   }
 
   handleWalking = (e) => {
-    this.props.canvas.getContext("2d").clearRect(0, 0, this.props.canvas.width, this.props.canvas.height)
+    if (e.keyCode === 32) {
+      this.state.speed !== 14 ? this.setState({speed: 14}) : this.setState({speed: 4})
+    }
 
-    if (e.keyCode === 37) {
-      this.setState({
-          walkingCycle: (this.state.walkingCycle+1) % 2,
-          xPosition: this.state.xPosition -= 7
-      })
-    } else if (e.keyCode === 38) {
-      this.setState({
-          walkingCycle: (this.state.walkingCycle+1) % 2,
-          yPosition: this.state.yPosition -= 7
-      })
-    } else if (e.keyCode === 39) {
-      this.setState({
-          walkingCycle: (this.state.walkingCycle+1) % 2,
-          xPosition: this.state.xPosition += 7
-      })
-    } else if (e.keyCode === 40) {
-      this.setState({
-          walkingCycle: (this.state.walkingCycle+1) % 2,
-          yPosition: this.state.yPosition += 7
+    if (e.keyCode > 36 && e.keyCode < 41 ) {
+      this.props.canvas.getContext("2d").clearRect(0, 0, this.props.canvas.width, this.props.canvas.height)
+      this.setState({walkingCycle: (this.state.walkingCycle+1) % 2}, ()=> {
+        switch(e.keyCode) {
+          case 37: this.setState({xPosition: this.state.xPosition -= this.state.speed}); break;
+          case 38: this.setState({yPosition: this.state.yPosition -= this.state.speed}); break;
+          case 39: this.setState({xPosition: this.state.xPosition += this.state.speed}); break;
+          case 40: this.setState({yPosition: this.state.yPosition += this.state.speed}); break;
+        }
       })
     }
+
   }
 
   componentDidMount() {
@@ -49,3 +43,11 @@ export default class Player extends Component {
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    canvas: state.canvas
+  }
+}
+
+export default connect(mapStateToProps)(Player)
