@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react'
 import { setThisCanvas } from '../actions.js'
 import { connect } from 'react-redux'
 import Player from './Player'
+import Tourist from './Tourist'
 
 class Canvas extends Component {
 
@@ -14,14 +15,12 @@ class Canvas extends Component {
     this.refs.playarea.style = `background: url('../3dBrooklynBridge.jpg'); background-size: ${480*this.props.backgroundMagnification}px; background-position: center;`
   }
 
-  // background-size: 700px 260px;
-  // background-position: center;
-
   render() {
     return (
       <Fragment>
         <canvas ref='playarea' width="480" height="300"></canvas>
         <Player/>
+        <Tourist/>
       </Fragment>
     )
   }

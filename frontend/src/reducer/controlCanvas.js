@@ -21,8 +21,6 @@ const controlCanvas = (state = initialState, action) => {
         player: {
           ...state.player,
           xPosition: state.player.xPosition + (action.payload.x*state.player.speed),
-          // xPosition: state.player.xPosition,
-          // yPosition: state.player.yPosition + (action.payload.y*state.player.speed),
           yPosition: state.player.yPosition,
           walkingCycle: (state.player.walkingCycle+1) % state.player.walkingCollection.length
         },
@@ -40,7 +38,5 @@ const controlCanvas = (state = initialState, action) => {
       return state
   }
 }
-
-
 
 export default controlCanvas

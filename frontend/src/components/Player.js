@@ -34,7 +34,7 @@ class Player extends Component {
   }
 
   componentDidUpdate() {
-    this.props.canvas.getContext("2d").clearRect(0, 0, this.props.canvas.width, this.props.canvas.height)
+    this.props.canvas.getContext("2d").clearRect(this.props.player.xPosition-5, this.props.player.yPosition-5, 60, 60)
     const img = this.refs.playerImg
     img.src = (this.props.player.walkingCycle === 0 ? '../right.png' : '../left.png')
     this.props.canvas.getContext("2d").drawImage(img, this.props.player.xPosition, this.props.player.yPosition, 50, 50)

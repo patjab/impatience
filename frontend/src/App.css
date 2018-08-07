@@ -30,7 +30,6 @@ html, body, div, canvas {
 canvas {
   background: #383741;
   background-repeat: no-repeat;
-  
   margin: 0 auto;
   padding: 0;
 }
